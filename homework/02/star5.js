@@ -1,6 +1,6 @@
 function star(x) {
     for (var i=1;i<=x;i++)
-    console.log("*")
+        console.log("*")
 }
 
 star(5)
