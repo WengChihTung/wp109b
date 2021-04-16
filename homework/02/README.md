@@ -94,11 +94,11 @@ wengchihtung@MacBook-Pro 02 % deno run between.js
 檔案：pB.js
 
 ```js
-function isPrime(i) {
-    if (i < 2) 
+function isPrime(n) {
+    if (n < 2) 
         return 0;
-    for (var k=2; k * k <= i; k++)
-        if (i % k == 0) 
+    for (var k=2; k * k <= n; k++)
+        if (n % k == 0) 
             return 0;
     return 1;
 }
