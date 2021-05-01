@@ -5,8 +5,8 @@ class Vector {
     add(f) {
         var r = []
         var s = this
-        for (var i=0; i<s.a.length; i++) {
-            r[i] = s.a[i]+f.a[i]
+        for (var i = 0; i < s.a.length; i++) {
+            r[i] = s.a[i] + f.a[i]
         }
         return new Vector(r)
     }
@@ -14,7 +14,7 @@ class Vector {
         var r = []
         var s = this
         for (var i = 0; i < s.a.length; i++) {
-            r[i] = s.a[i]-f.a[i]
+            r[i] = s.a[i] - f.a[i]
         }
         return new Vector(r)
     }
@@ -23,7 +23,7 @@ class Vector {
         var s = this
         var k = 0
         for (var i = 0; i < s.a.length; i++) {
-            r[i] = s.a[i]*f.a[i]
+            r[i] = s.a[i] * f.a[i]
             k = k + r[i]
         }
         return k
@@ -32,12 +32,12 @@ class Vector {
         var r = []
         var s = this
         for (var i = 0; i < s.a.length; i++) {
-            r[i] = s.a[i]*(-1)
+            r[i] = s.a[i] * (-1)
         }
         return new Vector(r)
     }
   }
-  
+
   var x = new Vector([1, 2, 3])
   var y = new Vector([1, 1, 1])
   console.log("x.add(y)=", x.add(y))
