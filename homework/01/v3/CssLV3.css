@@ -1,0 +1,38 @@
+body {
+    background-color: lightblue;
+  }
+  /*整個 body：背景色。*/
+  
+  /*標題：字色、排列。*/
+  h1 {
+    color: white;
+    text-align: right;
+  }
+  
+  /*清單基本設定*/
+  ul.e{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #173969;
+  }
+  
+  /*清單：靠左。*/
+  ul.e li {
+    float: left;
+  }
+  
+  /*清單裡的每一格：顯示、字色、排列、高寬、減飾*/
+  ul.e li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 18px 57px;
+    text-decoration: none;
+  }
+  
+  /*清單裡的每一格放上去：背景變色。*/
+  ul.e li a:hover {
+    background-color: #ababab;
+  }

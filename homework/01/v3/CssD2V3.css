@@ -1,0 +1,22 @@
+div {
+    background-color: #abcdef;
+    padding: 10px;
+    margin: 20px;
+  }
+  
+  div.b {
+    background-color: #abfdce;
+    padding: 30px;
+  
+  }
+  
+  div.c {
+    background-color: #abefef;
+    padding: 20px;
+  }
+  
+  p {
+    font-family: sans-serif;
+    font-size: 20px;
+    text-align: left;
+  }

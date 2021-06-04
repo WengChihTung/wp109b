@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="CssLV3.css">
+  <link rel="stylesheet" href="CssD2V3.css">
+</head>
+<body>
+
+<h1>My Website</h1>
+
+<ul class=e>
+  <li><a href="HomeV3.html">Home</a></li>
+  <li><a href="#Workss">Works</a></li>
+  <li><a href="HomeworkV3.html">Homework</a></li>
+  <li><a href="WikiV3.html">Wiki</a></li>
+  <li><a href="AboutV3.html">About</a></li>
+  <li><a href="#More">More</a></li>
+</ul>
+
+<div class=b>
+  <p>
+    <b>03</b><br>
+    <pre>
+      class Vector {
+        constructor(array) {
+            this.a = array
+        }
+        add(f) {
+            var r = []
+            var s = this
+            for (var i = 0; i &lt; s.a.length; i++) {
+                r[i] = s.a[i] + f.a[i]
+            }
+            return new Vector(r)
+        }
+        sub(f) {
+            var r = []
+            var s = this
+            for (var i = 0; i &lt; s.a.length; i++) {
+                r[i] = s.a[i] - f.a[i]
+            }
+            return new Vector(r)
+        }
+        dot(f) {
+            var r = []
+            var s = this
+            var k = 0
+            for (var i = 0; i &lt; s.a.length; i++) {
+                r[i] = s.a[i] * f.a[i]
+                k = k + r[i]
+            }
+            return k
+        }
+        neg() {
+            var r = []
+            var s = this
+            for (var i = 0; i &lt; s.a.length; i++) {
+                r[i] = s.a[i] * (-1)
+            }
+            return new Vector(r)
+        }
+      }
+
+      var x = new Vector([1, 2, 3])
+      var y = new Vector([1, 1, 1])
+      console.log("x.add(y)=", x.add(y))
+      console.log("x.sub(y)=", x.sub(y))
+      console.log("x.dot(y)=", x.dot(y))
+      console.log("x.neg()=", x.neg())
+      
+    </pre>
+  </p>
+</div>
+
+<div class=c>
+  <p>
+    <b>02</b>
+    <pre>
+      function star(x) {
+          for (var i=1;i&lt;=x;i++)
+              console.log("*")
+      }
+
+      star(5)
+    </pre>
+    <pre>
+      function between(x,y) {
+          for (var i=x; i&lt;=y; i++)
+              console.log(i)
+      }
+
+      between(3,8)
+    </pre>
+    <pre>
+      function isPrime(n) {
+          if (n &lt; 2)
+              return 0;
+          for (var k=2; k * k &lt;= n; k++)
+              if (n % k == 0)
+                  return 0;
+          return 1;
+      }
+
+      function primeBetween(a, b) {
+          for (var i=a; i&lt;=b; i++)
+              if (isPrime(i))
+              console.log(i);
+      }
+
+      primeBetween(3, 15)
+    </pre>
+  </p>
+</div>
+
+</body>
+</html>

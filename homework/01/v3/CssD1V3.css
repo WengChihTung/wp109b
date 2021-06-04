@@ -1,0 +1,25 @@
+  /*所有 div：背景色、內邊。*/
+  div {
+    background-color: #abcdef;
+    padding: 10px;
+  }
+  
+  /*屬於 class b 的 div 裡的 paragraph：背景色、p 內邊。*/
+  div.b p {
+    background-color: #abfdce;
+    padding: 30px;
+  
+  }
+  
+  /*屬於 class c 的 div 裡的 paragraph：背景色、p 內邊。*/
+  div.c p {
+    background-color: #abefef;
+    padding: 20px;
+  }
+  
+  /*所有 paragraph：字型、大小、排列。*/
+  p {
+    font-family: sans-serif;
+    font-size: 20px;
+    text-align: center;
+  }  
