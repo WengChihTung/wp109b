@@ -1,0 +1,191 @@
+<!--小遊戲：射龍門-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="CssLV3.css">
+  <link rel="stylesheet" href="CssD2V3.css">
+</head>
+<body>
+
+<h1>My Website</h1>
+
+<ul class=e>
+  <li><a href="HomeV3.html">Home</a></li>
+  <li><a href="WorksV3.html">Works</a></li>
+  <li><a href="HomeworkV3.html">Homework</a></li>
+  <li><a href="WikiV3.html">Wiki</a></li>
+  <li><a href="AboutV3.html">About</a></li>
+  <li><a href="MoreV3.html">More</a></li>
+</ul>
+
+<div class=b>
+  <p>
+    <b>射龍門</b><br>
+    <br>
+    規則講解：<br>
+    <br>
+    場上的兩張牌為底牌。<br>
+    <br>
+    若兩張底牌不同，在你下注後你會得到你的牌；<br>
+    若兩張底牌相同，在你選擇比大或比小並下注後你會得到你的牌。<br>
+    <br>
+    <b>兩張底牌不同時：</b><br>
+    若你的牌介於底牌之間，獲勝，贏得 1 倍彩金；<br>
+    若你的牌位於底牌之外，失敗，賠償 1 倍彩金；<br>
+    若你的牌與底牌其中一張相同，撞柱，賠償 2 倍彩金。<br>
+    <br>
+    <b>兩張底牌相同時：</b><br>
+    若你選擇比大（小）且你的牌大（小）於底牌，獲勝，贏得 1 倍彩金；<br>
+    若你選擇比大（小）但你的牌小（大）於底牌，失敗，賠償 1 倍彩金；<br>
+    若你的牌與底牌相同，撞柱，賠償 2 倍彩金。<br>
+    <br>
+    <button type="button" onclick="game()">開始遊戲</button>
+  </p>
+  <p id="card" style="display:none">底牌：</p>
+  <p id="card1" style="display:none"></p>
+  <p id="and" style="display:none">和</p>
+  <p id="card2" style="display:none"></p>
+  <br>
+
+  <label id="fbig" for="big" style="display:none">比大或比小：</label>
+  <select id="big" style="display:none">
+    <option value = 999>比大</option>
+    <option value = 0>比小</option>
+  </select>
+  <label id="fbet" for="bet" style="display:none">下注金額:</label>
+  <input type="number" min=0 id="bet" style="display:none">
+  <input type="submit" id="bett" onclick="outcome()" value="下注" style="display:none">
+  <br>
+
+  <p id="ucard" style="display:none">你的牌：</p>
+  <p id="card3" style="display:none"></p>
+  <br>
+  <p id="out" style="display:none">結果：</p>
+  <p id="outs" style="display:none"></p>
+
+  <p id="mon" style="display:none">收益：</p>
+  <p id="money" style="display:none"></p>
+</div>
+
+<script>
+  var x //底牌
+  var y //底牌
+  var z //你的牌
+  var m //money
+  var b //big
+  var c //condition
+
+  function game() {
+    x = Math.floor(Math.random() * 13) + 1
+    y = Math.floor(Math.random() * 13) + 1
+    document.getElementById("card1").innerHTML = x
+    document.getElementById("card2").innerHTML = y
+    document.getElementById("bett").disabled = false
+
+    card.style="display:inline"
+    card1.style="display:inline"
+    and.style="display:inline"
+    card2.style="display:inline"
+
+    if (x == y) {
+      fbig.style = "display:inline"
+      big.style = "display:inline"
+    }
+    else {
+      fbig.style = "display:none"
+      big.style = "display:none"
+    }
+
+    fbet.style="display:inline"
+    bet.style="display:inline"
+    bett.style="display:inline"
+
+    ucard.style="display:none"
+    card3.style="display:none"
+    out.style="display:none"
+    outs.style="display:none"
+    mon.style="display:none"
+    money.style="display:none"
+  }
+
+  function outcome() {
+    m = bet.value
+
+    if (!(m>0)) {
+      alert("Please enter a positive number!")
+    }
+
+    else {
+      z = Math.floor(Math.random() * 13) + 1
+      document.getElementById("card3").innerHTML = z
+      document.getElementById("bett").disabled = true
+      b = big.value
+
+      ucard.style="display:inline"
+      card3.style="display:inline"
+      out.style="display:inline"
+      outs.style="display:inline"
+      mon.style="display:inline"
+      money.style="display:inline"
+
+      if (x !== y) {
+        if (z > x && z < y) {
+          c = 1
+        }
+        else if (z < x && z > y) {
+          c = 1
+        }
+        else if (x == z) {
+          c = 2
+        }
+        else if (y == z) {
+          c = 2
+        }
+        else {
+          c = 0
+        }
+      }
+      else {
+        if (b == 999) { //常常忘了打雙等號==
+          if (z > x) {
+            c = 1
+          }
+          else if (z < x) {
+            c = 0
+          }
+        }
+        else if (b == 0) {
+          if (z < x) {
+            c = 1
+          }
+          else if (z > x) {
+            c = 0
+          }
+        }
+        else {
+          c = 2
+        }
+      }
+
+      if (c == 1) {
+        document.getElementById("outs").innerHTML = "你贏了！"
+        m = m * 1
+        document.getElementById("money").innerHTML = m
+      }
+      else if (c == 0) {
+        document.getElementById("outs").innerHTML = "你輸了！"
+        m = m * -1
+        document.getElementById("money").innerHTML = m
+      }
+      else {
+        document.getElementById("outs").innerHTML = "撞柱！"
+        m = m * -2
+        document.getElementById("money").innerHTML = m
+      }
+    }
+  }
+</script>
+
+</body>
+</html>
