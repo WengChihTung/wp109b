@@ -27,86 +27,123 @@
     <br>
     場上的兩張牌為底牌。<br>
     <br>
-    若兩張底牌不同，在你下注後你會得到你的牌；<br>
-    若兩張底牌相同，在你選擇比大或比小並下注後你會得到你的牌。<br>
+    若兩張底牌大小不同，在你下注後你會得到你的牌；<br>
+    若兩張底牌大小相同，在你選擇比大或比小並下注後你會得到你的牌。<br>
     <br>
-    <b>兩張底牌不同時：</b><br>
+    下注金額最低為 100。<br>
+    <br>
+    <b>兩張底牌大小不同時：</b><br>
     若你的牌介於底牌之間，獲勝，贏得 1 倍彩金；<br>
     若你的牌位於底牌之外，失敗，賠償 1 倍彩金；<br>
     若你的牌與底牌其中一張相同，撞柱，賠償 2 倍彩金。<br>
     <br>
-    <b>兩張底牌相同時：</b><br>
+    <b>兩張底牌大小相同時：</b><br>
     若你選擇比大（小）且你的牌大（小）於底牌，獲勝，贏得 1 倍彩金；<br>
     若你選擇比大（小）但你的牌小（大）於底牌，失敗，賠償 1 倍彩金；<br>
     若你的牌與底牌相同，撞柱，賠償 2 倍彩金。<br>
     <br>
-    <button type="button" onclick="game()">開始遊戲</button>
+    <button type="button" id="start" onclick="game()">開始遊戲</button>
   </p>
-  <p id="card" style="display:none">底牌：</p>
-  <p id="card1" style="display:none"></p>
-  <p id="and" style="display:none">和</p>
-  <p id="card2" style="display:none"></p>
+  <p id="bankroll" style="display: none;">籌碼：</p>
+  <p id="chip" style="display: none;"></p>
+  <p id="high" style="display: none;">；最高紀錄：</p>
+  <p id="record" style="display: none;"></p>
+  <br>
+  <p id="card" style="display: none;">底牌：</p>
+  <p id="card1" style="display: none;"></p>
+  <p id="and" style="display: none;">和</p>
+  <p id="card2" style="display: none;"></p>
   <br>
 
-  <label id="fbig" for="big" style="display:none">比大或比小：</label>
-  <select id="big" style="display:none">
+  <label id="fbig" for="big" style="display: none;">比大或比小：</label>
+  <select id="big" style="display: none;">
     <option value = 999>比大</option>
     <option value = 0>比小</option>
   </select>
-  <label id="fbet" for="bet" style="display:none">下注金額:</label>
-  <input type="number" min=0 id="bet" style="display:none">
-  <input type="submit" id="bett" onclick="outcome()" value="下注" style="display:none">
+  <label id="fbet" for="bet" style="display: none;">下注金額:</label>
+  <input type="number" min=100 step="100" id="bet" style="display: none;">
+  <input type="submit" id="bett" onclick="outcome()" value="下注" style="display: none;">
   <br>
 
-  <p id="ucard" style="display:none">你的牌：</p>
-  <p id="card3" style="display:none"></p>
+  <p id="ucard" style="display: none;">你的牌：</p>
+  <p id="card3" style="display: none;"></p>
   <br>
-  <p id="out" style="display:none">結果：</p>
-  <p id="outs" style="display:none"></p>
-
-  <p id="mon" style="display:none">收益：</p>
-  <p id="money" style="display:none"></p>
+  <p id="out" style="display: none;">結果：</p>
+  <p id="outs" style="display: none;"></p>
+  <p id="mon" style="display: none;">收益：</p>
+  <p id="money" style="display: none;"></p>
+  <br>
+  <p id="cont" style="display: none;"></p>
 </div>
 
 <script>
-  var x //底牌
-  var y //底牌
-  var z //你的牌
-  var m //money
+  var ch = 1500 //起始chip
+  var re = ch //最高記錄
+  var x1 //底牌
+  var y1
+  var x2 //底牌
+  var y2
+  var x3 //你的牌
+  var y3
+  var m //收益money
   var b //big
   var c //condition
 
+  var poker = []
+  for (var i = 1; i < 10; i++) {
+    poker[i] = ["Spade "+(i+1), "Heart "+(i+1), "Diamond "+(i+1), "Club "+(i+1)]
+  }
+  poker[0] = ["Spade A", "Heart A", "Diamond A", "Club A"]
+  poker[10] = ["Spade J", "Heart J", "Diamond J", "Club J"]
+  poker[11] = ["Spade Q", "Heart Q", "Diamond Q", "Club Q"]
+  poker[12] = ["Spade K", "Heart K", "Diamond K", "Club K"]
+
   function game() {
-    x = Math.floor(Math.random() * 13) + 1
-    y = Math.floor(Math.random() * 13) + 1
-    document.getElementById("card1").innerHTML = x
-    document.getElementById("card2").innerHTML = y
+    document.getElementById("chip").innerHTML = ch
+    document.getElementById("record").innerHTML = re
+    x1 = Math.floor(Math.random() * 12)
+    y1 = Math.floor(Math.random() * 3)
+    document.getElementById("card1").innerHTML = poker[x1][y1]
+    
+    x2 = x1
+    y2 = y1
+    while (x1 == x2 && y1 == y2) {
+      x2 = Math.floor(Math.random() * 12)
+      y2 = Math.floor(Math.random() * 3)
+    }
+    document.getElementById("card2").innerHTML = poker[x2][y2]
     document.getElementById("bett").disabled = false
+    document.getElementById("start").disabled = true
 
-    card.style="display:inline"
-    card1.style="display:inline"
-    and.style="display:inline"
-    card2.style="display:inline"
+    bankroll.style="display: inline;"
+    chip.style="display: inline;"
+    high.style="display: inline;"
+    record.style="display: inline;"
+    card.style="display: inline;"
+    card1.style="display: inline;"
+    and.style="display: inline;"
+    card2.style="display: inline;"
 
-    if (x == y) {
-      fbig.style = "display:inline"
-      big.style = "display:inline"
+    if (x1 == x2) {
+      fbig.style = "display: inline;"
+      big.style = "display: inline;"
     }
     else {
-      fbig.style = "display:none"
-      big.style = "display:none"
+      fbig.style = "display: none;"
+      big.style = "display: none;"
     }
 
-    fbet.style="display:inline"
-    bet.style="display:inline"
-    bett.style="display:inline"
+    fbet.style="display: inline;"
+    bet.style="display: inline;"
+    bett.style="display: inline;"
 
-    ucard.style="display:none"
-    card3.style="display:none"
-    out.style="display:none"
-    outs.style="display:none"
-    mon.style="display:none"
-    money.style="display:none"
+    ucard.style="display: none;"
+    card3.style="display: none;"
+    out.style="display: none;"
+    outs.style="display: none;"
+    mon.style="display: none;"
+    money.style="display: none;"
+    cont.style="display: none;"
   }
 
   function outcome() {
@@ -116,73 +153,94 @@
       alert("Please enter a positive number!")
     }
 
+    else if (m > ch) {
+      alert("Not enough chips.")
+    }
+
+    else if (m < 100) {
+      alert("At least bet 100。")
+    }
+
     else {
-      z = Math.floor(Math.random() * 13) + 1
-      document.getElementById("card3").innerHTML = z
+      x3 = x1
+      y3 = y1
+      while (x1 == x3 && y1 == y3 || x2 == x3 && y2 == y3) {
+        x3 = Math.floor(Math.random() * 12)
+        y3 = Math.floor(Math.random() * 3)
+      }
+      document.getElementById("card3").innerHTML = poker[x3][y3]
       document.getElementById("bett").disabled = true
       b = big.value
 
-      ucard.style="display:inline"
-      card3.style="display:inline"
-      out.style="display:inline"
-      outs.style="display:inline"
-      mon.style="display:inline"
-      money.style="display:inline"
+      ucard.style="display: inline;"
+      card3.style="display: inline;"
+      out.style="display: inline;"
+      outs.style="display: inline;"
+      mon.style="display: inline;"
+      money.style="display: inline;"
+      cont.style="display: inline;"
 
-      if (x !== y) {
-        if (z > x && z < y) {
+      if (x1 !== x2) {
+        if (x3 > x1 && x3 < x2 || x3 < x1 && x3 > x2) {
           c = 1
         }
-        else if (z < x && z > y) {
-          c = 1
-        }
-        else if (x == z) {
-          c = 2
-        }
-        else if (y == z) {
+        else if (x1 == x3 || x2 == x3) {
           c = 2
         }
         else {
           c = 0
         }
       }
-      else {
+      else if (x1 == x2) {
         if (b == 999) { //常常忘了打雙等號==
-          if (z > x) {
+          if (x3 > x1) {
             c = 1
           }
-          else if (z < x) {
+          else if (x3 < x1) {
             c = 0
+          }
+          else if (x3 == x1){
+            c = 2
           }
         }
         else if (b == 0) {
-          if (z < x) {
+          if (x3 < x1) {
             c = 1
           }
-          else if (z > x) {
+          else if (x3 > x1) {
             c = 0
           }
-        }
-        else {
-          c = 2
+          else if (x3 == x1) {
+            c = 2
+          }
         }
       }
 
       if (c == 1) {
         document.getElementById("outs").innerHTML = "你贏了！"
         m = m * 1
-        document.getElementById("money").innerHTML = m
       }
       else if (c == 0) {
         document.getElementById("outs").innerHTML = "你輸了！"
         m = m * -1
-        document.getElementById("money").innerHTML = m
       }
-      else {
+      else if (c == 2) {
         document.getElementById("outs").innerHTML = "撞柱！"
         m = m * -2
-        document.getElementById("money").innerHTML = m
       }
+      document.getElementById("money").innerHTML = m
+      ch = ch + m
+      document.getElementById("chip").innerHTML = ch
+
+      if (ch < 100) {
+        document.getElementById("cont").innerHTML = "籌碼不足，遊戲結束。"
+      }
+      else {
+        if (ch > re) {re = ch}
+        document.getElementById("record").innerHTML = re
+        document.getElementById("start").disabled = false
+        document.getElementById("cont").innerHTML = "請按「開始遊戲」繼續。"
+      }      
     }
   }
 </script>
